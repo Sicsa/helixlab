@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Lista</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            function listazas(){  
+                $.ajax({        
+                    url:"cikkListazasServlet",
+                    type:"post",
+                    data:{"feladat":"osszesListazasa"},
+                    success:function(resultData){     
+                        
+                        var resdatalength = Object.keys(resultData).length;
+                        for(var i=0; i<resdatalength; i++){
+                        
+                            var sor = resultData[i];
+                            document.getElementById("mcikk").innerHTML += "<a href=#>"+sor[2]+"</a><br>";
+                           	// a sor[2], az adattáblában a cím nevü mező értékét jelöli
+                           
+                        }//end of for
+                        },//end of success
+                    error:function(){
+                        alert("hiba");
+                    }//end of error
+                });//end of ajax                    
+            }//  <-- end of function -->
+        
+        </script>
+    </head>
+    <body onload="listazas()">
+        <a href="index.html">Új cikk létrehozása</a><br />
+        Korábbi cikkek:
+       
+            <div id="mcikk"></div>
+      
+    </body>
+</html>
